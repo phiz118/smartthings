@@ -1,8 +1,11 @@
 /**
  *  DSC Command Center
  *
- *  Copyright 2015 David Cauthron
- *
+ *  Copyright 2015
+ *  Author: David Cauthron
+ *  Also Attributed:  JTT-AE <aesystems@gmail.com>
+ *                    Rob Fisher <robfish@att.net>
+ *					  Carlos Santiago <carloss66@gmail.com> 
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  *  in compliance with the License. You may obtain a copy of the License at:
  *
@@ -15,7 +18,6 @@
  */
 definition(
     name: "DSC Command Center v2",
-    namespace: "phiz118",
     author: "David Cauthron",
     description: "Command Center SmartApp for DSC Alarms",
     category: "My Apps",
@@ -31,7 +33,7 @@ preferences {
             input("port", "text", title: "Port", description: "The port")
         }
         section("Button for Alarm") {
-            input "thecommand", "capability.Switch", required: true
+            input "thecommand", "capability.Switch", required: false
         }
     }
 }
@@ -50,7 +52,7 @@ def updated() {
 }
 
 def initialize() {
-	log.debug "Version 1.0"
+	log.debug "Version 1.1"
     subscribe(location, "alarmSystemStatus", switchUpdate)
 	subscribe(thecommand, "switch", switchUpdate)
 }
