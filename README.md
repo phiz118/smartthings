@@ -1,4 +1,4 @@
-Smartthings for DSC Based Alarm Panels (others may work as well)
+# Smartthings for DSC Based Alarm Panels (others may work as well)
 
 
 ## <Overview>
