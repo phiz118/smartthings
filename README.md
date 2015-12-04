@@ -83,13 +83,13 @@ It's installed!  Oh wait, it's not configured yet...
 
 The first step is to rename alarmserver-example.cfg to alarmserver.cfg.  You will then want to open alarmserver.cfg in your favorite editor (Notepadd++ for me!) and start editing to customize it for your install.  I would change...
 
-logfile --> Leave blank for now. You can turn this on later if you'd like
-certfile & keyfile --> Directory where you installed the cert if you didn't skip the step above.  Even if you did skip the step, I would recommend putting the directory of the default certfile/keyfile that came with your Alarm Server zip file downloaded earlier.  Not doing this caused me an error.
-partition1 --> Make this equal to what your partition is called in the Envisalink webapp.
-zone# --> Add enough zones to match your alarm system and remove the rest.
-Smartthings --> There will be an entire section on this part because it is difficult.  Skip this for now.
-[envisalink] --> Update this section to match your install for envisalink.  The only thing I changed is the password.  You can do that by clicking on the "Network" button on your internal Envisalink homepage and filling in the "Change User Password" box.  This isn't required, but should be done for security reasons.
-alarmcode --> Leave blank!  If you fill this in, anyone on your network can simply call a URL to disarm your Security Panel.  VERY INSECURE!!!  We will add this into the smartthings configuration.
+	logfile --> Leave blank for now. You can turn this on later if you'd like
+	certfile & keyfile --> Directory where you installed the cert if you didn't skip the step above.  Even if you did skip the step, I would recommend putting the directory of the default certfile/keyfile that came with your Alarm Server zip file downloaded earlier.  Not doing this caused me an error.
+	partition1 --> Make this equal to what your partition is called in the Envisalink webapp.
+	zone# --> Add enough zones to match your alarm system and remove the rest.
+	Smartthings --> There will be an entire section on this part because it is difficult.  Skip this for now.
+	[envisalink] --> Update this section to match your install for envisalink.  The only thing I changed is the password.  You can do that by clicking on the "Network" button on your internal Envisalink homepage and filling in the "Change User Password" box.  This isn't required, but should be done for security reasons.
+	alarmcode --> Leave blank!  If you fill this in, anyone on your network can simply call a URL to disarm your Security Panel.  VERY INSECURE!!!  We will add this into the smartthings configuration.
 
 Let's turn on the Alarm Server to make sure you don't see any errors.  From the directory where you installed Alarm Server, run the following.
 
@@ -131,9 +131,9 @@ Using the Smartthings IDE create 3 new device types using the code from the devi
 
 There are 3 types of devices you can create:
 
-* DSC Panel       - (Shows partition status info)
-* DSC ZoneContact - (contact device open/close)
-* DSC ZoneMotion  - (motion device active/inactive)
+	* DSC Panel       - (Shows partition status info)
+	* DSC ZoneContact - (contact device open/close)
+	* DSC ZoneMotion  - (motion device active/inactive)
 
 In the Web IDE for Smartthings create a new device type for each of the above devices and paste in the code for each device from the corresponding groovy files in the repo.
 
@@ -202,11 +202,11 @@ https://graph.api.smartthings.com/oauth/token
 
 The following parameters should be sent on the request:
 
-grant_type: use "authorization_code" for this flow.
-code: this is the authorization code obtained from the previous step.
-client_id: this is the client id of the SmartApp. It is the identifier for the SmartApp.
-client_secret: the OAuth client secret of the SmartApp.
-redirect_uri: the URI of the server that will receive the token. This must match the URI you used to obtain the authorization code.
+	grant_type: use "authorization_code" for this flow.
+	code: this is the authorization code obtained from the previous step.
+	client_id: this is the client id of the SmartApp. It is the identifier for the SmartApp.
+	client_secret: the OAuth client secret of the SmartApp.
+	redirect_uri: the URI of the server that will receive the token. This must match the URI you used to obtain the authorization code.
 
 	Example:
 	curl -k https://graph.api.smartthings.com/oauth/token?grant_type=authorization_code&client_id={client_id}&client_secret={client_secret}&redirect_uri=https://graph.api.smartthings.com/oauth/callback&scope=app&code={code}
@@ -263,21 +263,21 @@ Create a new Device Type (My Device Types --> New Device Type).  Click "From Cod
 
 Create a new Device (My Devices --> New Device).
 
-Name: Anything you want --> I used DCS Command
-Device Network Id: Anything you want that's unique --> I used seccom1
-Type: DSC Command Center
-Location: Name of your hub
+	Name: Anything you want --> I used DCS Command
+	Device Network Id: Anything you want that's unique --> I used seccom1
+	Type: DSC Command Center
+	Location: Name of your hub
 
 Click Create. 
 
 Open the Smartthings App on your phone or tablet, navigate to SmartApps, DSC Command V2 and fill in the following:
 
-IP: IP address of your Alarm Server
-Port: Port of Alarm Server configured in alarmserver.cfg
-Integrate w/ Smart Monitor: Yes/No - Yes if you want the Smart Home Monitor integration!
+	IP: IP address of your Alarm Server
+	Port: Port of Alarm Server configured in alarmserver.cfg
+	Integrate w/ Smart Monitor: Yes/No - Yes if you want the Smart Home Monitor integration!
 
-Button for Alarm - Which: DSC Command
-Name: Anything you want --> I used DSC Command V2
+	Button for Alarm - Which: DSC Command
+	Name: Anything you want --> I used DSC Command V2
 
 Click Done
 
