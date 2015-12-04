@@ -214,7 +214,7 @@ Note that when a location is chosen, SmartThings will attempt to find a SmartApp
 
 ### Get Access Token
 
-Use the authorization code, along with the client ID and secret, to get the access token.  This is where we will use cURL.
+Use the authorization code, along with the client ID and secret, to get the access token.  This is where we will use cURL otherwise you will receive a 401 unauthorized error.
 
 https://graph.api.smartthings.com/oauth/token
 
@@ -227,7 +227,7 @@ The following parameters should be sent on the request:
 	redirect_uri: the URI of the server that will receive the token. This must match the URI you used to obtain the authorization code.
 
 	Example:
-	curl -k https://graph.api.smartthings.com/oauth/token?grant_type=authorization_code&client_id={client_id}&client_secret={client_secret}&redirect_uri=https://graph.api.smartthings.com/oauth/callback&scope=app&code={code}
+	curl -k "https://graph.api.smartthings.com/oauth/token?grant_type=authorization_code&client_id={client_id}&client_secret={client_secret}&redirect_uri=https://graph.api.smartthings.com/oauth/callback&scope=app&code={code}"
 
 That will return a response like:
 
