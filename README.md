@@ -50,6 +50,8 @@ Once PIP is installed and the freeze command works, run the following:
 
 Now that you have thes modules installed, the next step is completely optional.  This will allow you to run AlarmServer with HTTPS which is more secure, however it won't work with our Smartthings app.  If your goal is to install the Smartthings app, then I would just skip this step.
 
+##Create your SSL Cert
+
 For those still here and wanting to run HTTPS, we need to obtain an SSL certificate.  To do that, I would recommend installing OpenSSL or purchasing your own.  I won't explain the latter as we are going for a home setup with this tutorial.  Here's a link to the open SSL binaries page.  This will give you the link to their Wiki where they have the recommended binaries for your OS.
 
 https://www.openssl.org/community/binaries.html
@@ -66,8 +68,6 @@ This will ask you a bunch of questions.  They were all easy to answer.  Juggie's
 
 
 ## Skip to  here if you don't care to run HTTPS!
-
-
 
 We are FINALLY ready to install Alarm Server.  Here's the link to Juggie's version.  For smartthings, you have to use the Smartthings branch which I linked to here directly.  If you don't have GIT, just click the "Download ZIP" button on the github page and extract that into any directory you want.  I used C:/tools/AlarmServer-smartthings
 
@@ -107,6 +107,21 @@ In my case, this was...
 
 This should bring up a webpage that shows the status of your Partition (panel) and Zones.  Try clicking Arm (or Disarm if your panel is already armed) and make sure it controls your panel.  I would also validate that your zones are connected correctly by opening a door or window and seeing the status on the Alarm Server.
 
+## Remove HTTPS from Alarm Server
+
+To get Smartthings to work with Alarm Server, we will need to change it from HTTPS to HTTP.  This is pretty simple.
+
+Open alarmserver.py in edit mode in your favorite Notepad editor, and change line 
+
+# HTTPChannel(self, conn, addr)
+HTTPChannel(self, ssl.wrap_socket(conn, server_side=True, certfile=config.CERTFILE, keyfile=config.KEYFILE, ssl_version=ssl.PROTOCOL_TLSv1), addr)
+
+To
+
+HTTPChannel(self, conn, addr)
+# HTTPChannel(self, ssl.wrap_socket(conn, server_side=True, certfile=config.CERTFILE, keyfile=config.KEYFILE, ssl_version=ssl.PROTOCOL_TLSv1), addr)
+
+Fire Up Alarm Server and make sure it still works.  The URL should have changed from HTTPS to HTTP so you will have to change the front of the URL manually in your browser before it will come up.
 
 ## Smartthings Integration
 
