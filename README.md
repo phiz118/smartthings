@@ -16,7 +16,7 @@ The reason you need this device is that Smartthings cannot currently talk direct
 
 Once you purchase the EnvisaLink, it is very simple to install if you are even the slightest bit handy.  Here's a link to a YouTube video that explains how to install it.  I won't go into much more detail here other than to say that it doesn't have WiFi.  If your alarm unit isn't next to an enthernet jack, then you will need to find an alternative method.  There are many options that I won't go into here like MoCa (if you have Coax close by), Powerline Adapter, Wifi Client Bridge, etc...
 
-	https://www.youtube.com/watch?v=0MVauULEZuE
+https://www.youtube.com/watch?v=0MVauULEZuE
 
 Stop here until you have the EnvisaLink installed and you can see your unit on the evisalink webpage.
 
@@ -26,11 +26,11 @@ Stop here until you have the EnvisaLink installed and you can see your unit on t
 
 Now that you have that you have envisalink, you can start installing Alarm Server.  Unfortuantely, Smartthings cannot talk directly to Envisalink, so we need another middleman and that's where AlarmServer comes in to play.  You'll need a server setup to run Alarm Server with Python 2.7.10 installed.  Here's python.
 
-	https://www.python.org/downloads/
+https://www.python.org/downloads/
 
 Next, you'll want to install PIP (Package Management System for Python, similar to apt-get on unix) so that you can install pyOpenSSL which is required for AlarmServer.  Here's the instructions for installing PIP.
 
-	https://pip.pypa.io/en/latest/installing/
+https://pip.pypa.io/en/latest/installing/
 
 Validate that you have pip installed correctly by running `pip freeze` in the Python27\Scripts directory.
 
@@ -52,11 +52,11 @@ Now that you have thes modules installed, the next step is completely optional. 
 
 For those still here and wanting to run HTTPS, we need to obtain an SSL certificate.  To do that, I would recommend installing OpenSSL or purchasing your own.  I won't explain the latter as we are going for a home setup with this tutorial.  Here's a link to the open SSL binaries page.  This will give you the link to their Wiki where they have the recommended binaries for your OS.
 
-	https://www.openssl.org/community/binaries.html
+https://www.openssl.org/community/binaries.html
 
 Here's a direct link to the binaries I used, however this page looks like it's from 1990.  I didn't initially trust it, but once I saw it was the recommended binary from openssl.org, that rested my nerves.
 
-	https://slproweb.com/products/Win32OpenSSL.html
+https://slproweb.com/products/Win32OpenSSL.html
 
 Once installed, you'll need to run the following command to generate the key and cert from the OpenSSL's bin directory.
 
@@ -71,7 +71,7 @@ This will ask you a bunch of questions.  They were all easy to answer.  Juggie's
 
 We are FINALLY ready to install Alarm Server.  Here's the link to Juggie's version.  For smartthings, you have to use the Smartthings branch which I linked to here directly.  If you don't have GIT, just click the "Download ZIP" button on the github page and extract that into any directory you want.  I used C:/tools/AlarmServer-smartthings
 
-	https://github.com/juggie/AlarmServer/tree/smartthings
+https://github.com/juggie/AlarmServer/tree/smartthings
 
 There are many different versions of AlarmServer floating around, but I used juggies.
 
@@ -114,7 +114,7 @@ Wow, you've made it!!  Really, this is an accomplishment!  Unfortunately, the ha
 
 Let's start with Kholloway's documentation.  I shameless pulled his words here as I personally hate bouncing around between guides, however this is the link to his guide as well as the code we will be using.  Thank you Kholloway!!!
 
-	https://github.com/kholloway/smartthings-dsc-alarm
+https://github.com/kholloway/smartthings-dsc-alarm
 
 
 ## Kholloway's Documentation - Setting up Smartthings
@@ -158,7 +158,7 @@ For example: **zone1** or **zone5**
 
 OK - I didn't take the last paragraph because this is the point where it gets very hard if you have never done this before.  Once you do it once, it is much easier to do it again.  I will also warn you that the api changed in the past month so your old method may not work.  Here's a draft of the documentation from Jim @ Smartthings.
 
-	https://community.smartthings.com/t/remote-oauth2-token-request-failed-with-401/28541/11
+https://community.smartthings.com/t/remote-oauth2-token-request-failed-with-401/28541/11
 
 This worked perfectly EXCEPT for one issue.  You will NEED to use curl to return the token, however everything else can be run in a browser like Chrome.  It just didn't work for me in a browser.  One other hint, save off every URL that you generate in case you need to go back a step (you will need to go back a step).  
 
@@ -169,7 +169,7 @@ Here's how I did it - stealing Jim's words.
 
 Here's the main webapge for cURL.  This is a great tool for downloading the contents of a URL and we will use it here to present a POST to Smartthings.
 
-	http://curl.haxx.se/download.html
+http://curl.haxx.se/download.html
 
 Version I downloaded: http://curl.haxx.se/latest.cgi?curl=win64-ssl-sspi
 
