@@ -16,7 +16,7 @@
  *
  */
 metadata {
-	definition (name: "DSC Command Center") {
+	definition (name: "DSC Command Center", author: "David Cauthron") {
 		capability "Switch"
 		capability "polling"
 		
