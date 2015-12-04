@@ -190,6 +190,9 @@ Version I downloaded: http://curl.haxx.se/latest.cgi?curl=win64-ssl-sspi
 
 This will download a zip file with an curl.exe inside of it.  Extract this file somewhere, open your command window to the same folder where you extracted it.  We will run the command in a moment.
 
+## Enable OAuth - Get Client ID
+
+Navigate to the DSC Integration Smart App that you created earlier and click the "Edit Properties" button next to the Smart App (Don't click on the app link, this will bring up the code.  We want the properties, not the code).  Click OAuth --> Enable OAuth.  This will give you a Client ID and Client Secret.  We will use these two items through the next several steps so record them.
 
 ### Get Authorization Code
 
