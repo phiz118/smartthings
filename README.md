@@ -38,10 +38,10 @@ Example:
 
 C:\Python27\Scripts>pip freeze
 
- cffi==1.3.1
- cryptography==1.1.1
- enum34==1.1.1
- etc...
+	cffi==1.3.1
+	cryptography==1.1.1
+	enum34==1.1.1
+	etc...
 
 Once PIP is installed and the freeze command works, run the following:
 
