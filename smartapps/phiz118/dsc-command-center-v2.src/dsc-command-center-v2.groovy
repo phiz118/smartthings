@@ -29,8 +29,10 @@ definition(
 preferences {
 	preferences {
     	section("Alarm Server Settings") {
-            input("ip", "text", title: "IP", description: "The IP of your AlarmServer")
-            input("port", "text", title: "Port", description: "The port")
+            input("ip", "text", title: "IP", description: "The IP of your AlarmServer", required: true)
+            input("port", "text", title: "Port", description: "The port", required: true)
+            input("alarmCodePanel", "text", title: "Alarm Code", description: "The code for your alarm panel.", required: true)
+            input "smartMonitorInt", "enum", title: "Integrate w/ Smart Monitor?", options: ["Yes", "No"], required: true
         }
         section("Button for Alarm") {
             input "thecommand", "capability.Switch", required: false
@@ -52,26 +54,55 @@ def updated() {
 }
 
 def initialize() {
-	log.debug "Version 1.1"
-    subscribe(location, "alarmSystemStatus", switchUpdate)
+	log.debug "Version 1.3"
+    log.debug smartMonitorInt.value[0]
+    if(smartMonitorInt.value[0] != "N")
+    {
+    	subscribe(location, "alarmSystemStatus", alarmStatusUpdate)
+    }
 	subscribe(thecommand, "switch", switchUpdate)
 }
 
 def switchUpdate(evt) {
-	callAlarmServer(evt)
+	def eventMap = [
+        'stayarm':"/api/alarm/stayarm",
+        'disarm':"/api/alarm/disarm",
+        'arm':"/api/alarm/armwithcode"
+    ]
+	
+    def securityMonitorMap = [
+        'stayarm':"stay",
+        'disarm':"off",
+        'arm':"away"
+    ]
+    
+    if(smartMonitorInt.value[0] != "N")
+    {
+    	sendLocationEvent(name: "alarmSystemStatus", value: securityMonitorMap."${evt.value}")
+    }
+	callAlarmServer(evt, eventMap)
 }
 
-private callAlarmServer(evt) {
-	try {
-        def eventMap = [
-          'stayarm':"/api/alarm/stayarm",
-          'disarm':"/api/alarm/disarm",
-          'arm':"/api/alarm/arm",
-          'stay':"/api/alarm/stayarm",
-          'off':"/api/alarm/disarm",
-          'away':"/api/alarm/arm"
-        ]
+def alarmStatusUpdate(evt) {
+	def eventMap = [
+        'stay':"/api/alarm/stayarm",
+        'off':"/api/alarm/disarm",
+        'away':"/api/alarm/armwithcode"
+    ]
+	
+    def securityMonitorMap = [
+        'stay':"stayarm",
+        'off':"disarm",
+        'away':"arm"
+    ]
     
+    def command = securityMonitorMap."${evt.value}";
+    thecommand."$command"()
+	callAlarmServer(evt, eventMap)
+}
+
+private callAlarmServer(evt, eventMap) {
+	try {
         def path = eventMap."${evt.value}"
         
         sendHubCommand(new physicalgraph.device.HubAction(
@@ -79,7 +110,8 @@ private callAlarmServer(evt) {
             path: path,
             headers: [
                 HOST: "${ip}:${port}"
-            ]
+            ],
+    		query: [alarmcode: "${alarmCodePanel.value}"]
         ))
     } catch (e) {
         log.error "something went wrong: $e"
