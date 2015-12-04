@@ -37,10 +37,11 @@ Validate that you have pip installed correctly by running `pip freeze` in the Py
 Example:
 
 C:\Python27\Scripts>pip freeze
-cffi==1.3.1
-cryptography==1.1.1
-enum34==1.1.1
-etc...
+
+ cffi==1.3.1
+ cryptography==1.1.1
+ enum34==1.1.1
+ etc...
 
 Once PIP is installed and the freeze command works, run the following:
 
@@ -98,7 +99,7 @@ You should not see any errors at this point.  The two things that caught me were
 
 Once running, make sure you can see the alarmserver web page by navigating to...
 
-<server ip address>:<alarm server port>
+{server ip address}:{alarm server port}
 
 In my case, this was...
 
