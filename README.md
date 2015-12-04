@@ -113,13 +113,13 @@ To get Smartthings to work with Alarm Server, we will need to change it from HTT
 
 Open alarmserver.py in edit mode in your favorite Notepad editor, and change line 
 
-# HTTPChannel(self, conn, addr)
-HTTPChannel(self, ssl.wrap_socket(conn, server_side=True, certfile=config.CERTFILE, keyfile=config.KEYFILE, ssl_version=ssl.PROTOCOL_TLSv1), addr)
+	# HTTPChannel(self, conn, addr)
+	HTTPChannel(self, ssl.wrap_socket(conn, server_side=True, certfile=config.CERTFILE, keyfile=config.KEYFILE, ssl_version=ssl.PROTOCOL_TLSv1), addr)
 
 To
 
-HTTPChannel(self, conn, addr)
-# HTTPChannel(self, ssl.wrap_socket(conn, server_side=True, certfile=config.CERTFILE, keyfile=config.KEYFILE, ssl_version=ssl.PROTOCOL_TLSv1), addr)
+	HTTPChannel(self, conn, addr)
+	# HTTPChannel(self, ssl.wrap_socket(conn, server_side=True, certfile=config.CERTFILE, keyfile=config.KEYFILE, ssl_version=ssl.PROTOCOL_TLSv1), addr)
 
 Fire Up Alarm Server and make sure it still works.  The URL should have changed from HTTPS to HTTP so you will have to change the front of the URL manually in your browser before it will come up.
 
