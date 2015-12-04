@@ -1,7 +1,7 @@
 # Smartthings for DSC Based Alarm Panels (others may work as well)
 
 
-## <Overview>
+## Overview
 
 
 Overall, the documentation for how to get your Smartthings hub integrated with a DSC panel is spread out and difficult to find.  There's a great thread (https://community.smartthings.com/t/dsc-vista-alarm-smartapp-and-devices-based-on-alarmserver/3143) on the community forum and MANY people that helped get all of this together.  My goal is to make this a one stop shop to get you from ground zero to integrated with Smartthings.  I will say one word of caution, this will take you time and you need to understand a little bit about how to setup Smartthings.  This isn't easy, but I will try to help as much as I can.
@@ -11,7 +11,7 @@ To start, you'll need to purchase an integration unit like Envisalink v4 (http:/
 The reason you need this device is that Smartthings cannot currently talk directly with the DSC panel.  Even further, you will also need a small server (Raspberry Pi, Windows, Linux/Unix, etc. would work) to run a program called Alarm Server.  Ultimately, all of this together will allow you to make calls to your DSC panel using web based URLs.  For example, http://alarmserver:8111/api/alarm/arm.  This URL would ultimately arm your security system.  This will allow the smartthings app to call your DSC Panel to do things like Arm, Disarm, etc...
 
 
-## <Install EnvisaLink>
+## Install EnvisaLink
 
 
 Once you purchase the EnvisaLink, it is very simple to install if you are even the slightest bit handy.  Here's a link to a YouTube video that explains how to install it.  I won't go into much more detail here other than to say that it doesn't have WiFi.  If your alarm unit isn't next to an enthernet jack, then you will need to find an alternative method.  There are many options that I won't go into here like MoCa (if you have Coax close by), Powerline Adapter, Wifi Client Bridge, etc...
@@ -21,7 +21,7 @@ https://www.youtube.com/watch?v=0MVauULEZuE
 Stop here until you have the EnvisaLink installed and you can see your unit on the evisalink webpage.
 
 
-## <Install Alarm Server>
+## Install Alarm Server
 
 
 Now that you have that you have envisalink, you can start installing Alarm Server.  Unfortuantely, Smartthings cannot talk directly to Envisalink, so we need another middleman and that's where AlarmServer comes in to play.  You'll need a server setup to run Alarm Server with Python 2.7.10 installed.  Here's python.
@@ -77,7 +77,7 @@ There are many different versions of AlarmServer floating around, but I used jug
 It's installed!  Oh wait, it's not configured yet...
 
 
-## <Configure Alarm Server>
+## Configure Alarm Server
 
 
 The first step is to rename alarmserver-example.cfg to alarmserver.cfg.  You will then want to open alarmserver.cfg in your favorite editor (Notepadd++ for me!) and start editing to customize it for your install.  I would change...
@@ -107,7 +107,7 @@ In my case, this was...
 This should bring up a webpage that shows the status of your Partition (panel) and Zones.  Try clicking Arm (or Disarm if your panel is already armed) and make sure it controls your panel.  I would also validate that your zones are connected correctly by opening a door or window and seeing the status on the Alarm Server.
 
 
-## <Smartthings Integration>
+## Smartthings Integration
 
 Wow, you've made it!!  Really, this is an accomplishment!  Unfortunately, the hardest part is ahead.  We now need to create the Smartthings App and generate the keys.  I don't know why Smartthings decided to make this so difficult to understand, but they did.  On top of that, it was recently changed and took me a while to get it right.  The good news is that it has been well documented by others (THANK YOU!) so we will use their document with a few tweaks.
 
@@ -116,7 +116,7 @@ Let's start with Kholloway's documentation.  I shameless pulled his words here a
 https://github.com/kholloway/smartthings-dsc-alarm
 
 
-## <Kholloway's Documentation - Setting up Smartthings>
+## Kholloway's Documentation - Setting up Smartthings
 
 
 ### Setup a Smartthings developer account at:
@@ -243,7 +243,7 @@ A successful response will look like this (we will probably remove sending back 
 
 Keep the "INSTALLATION-ID" safe somewhere, we will use it in the alarmserver.cfg!!
 
-## <Configure Alarm Server - Part 2>
+## Configure Alarm Server - Part 2
 
 
 Make sure you stop Alarm Server (if you didn't earlier), and open alarmserver.cfg again, and fill in the following parameters that you retrieved from the previous steps.
@@ -254,7 +254,7 @@ callbackurl_access_token={Access Token}
 
 Start Alarm Server back up.  You should now see that Smartthings and Alarm Server are communicating.  Validate this by opening a door to see if Smartthings shows an open contact using the DSC Panel panel you installed earlier.
 
-## <Create a Smartthings App to Arm/Stay/Disarm and Integrate with "Smart Home Monitor">
+## Create a Smartthings App to Arm/Stay/Disarm and Integrate with "Smart Home Monitor"
 
 Navigate back to https://graph.api.smartthings.com and create a new SmartApp (My SmartApps --> New SmartApp).  Click "From Code" and paste the code from smartapps/phiz118/dsc-command-center-v2.src from this github repository.  Click Create.  Click Publish --> For Me
 
