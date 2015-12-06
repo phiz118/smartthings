@@ -24,33 +24,22 @@ Stop here until you have the EnvisaLink installed and you can see your unit on t
 ## Install Alarm Server
 
 
-Now that you have that you have envisalink, you can start installing Alarm Server.  Unfortuantely, Smartthings cannot talk directly to Envisalink, so we need another middleman and that's where AlarmServer comes in to play.  You'll need a server setup to run Alarm Server with Python 2.7.10 installed.  Here's python.
+Now that you have that you have envisalink, you can start installing Alarm Server.  Unfortuantely, Smartthings cannot talk directly to Envisalink, so we need another middleman and that's where AlarmServer comes in to play.  You'll need a server setup to run Alarm Server with Python 2.7.XX installed.  Here's python.
 
 https://www.python.org/downloads/
 
-Next, you'll want to install PIP (Package Management System for Python, similar to apt-get on unix) so that you can install pyOpenSSL which is required for AlarmServer.  Here's the instructions for installing PIP.
+Next, you'll want to install PIP (Package Management System for Python, similar to apt-get on unix) so that you can install pyOpenSSL which is required for AlarmServer.  Here's the instructions for installing PIP.  Use the section for get-pip.py.
 
 https://pip.pypa.io/en/latest/installing/
 
-Validate that you have pip installed correctly by running `pip freeze` in the Python27\Scripts directory.
-
-	Example:
-
-	C:\Python27\Scripts>pip freeze
-
-	cffi==1.3.1
-	cryptography==1.1.1
-	enum34==1.1.1
-	etc...
-
-Once PIP is installed and the freeze command works, run the following:
+Once PIP is installed, run the following:
 
 	pip install requests
 	pip install pyopenssl
 
-Now that you have thes modules installed, the next step is completely optional.  This will allow you to run AlarmServer with HTTPS which is more secure, however it won't work with our Smartthings app.  If your goal is to install the Smartthings app, then I would just skip this step.
+Now that you have thes modules installed, the next step is completely optional.  This will allow you to run AlarmServer with HTTPS which is more secure, however it won't work with our Smartthings app.  If your goal is to install the Smartthings app, then please skip this step.  The smartthings app will not work with HTTPS.  You'll need to turn this off later.
 
-##Create your SSL Cert
+##Create your SSL Cert - SKIP if you want to use Smartthings
 
 For those still here and wanting to run HTTPS, we need to obtain an SSL certificate.  To do that, I would recommend installing OpenSSL or purchasing your own.  I won't explain the latter as we are going for a home setup with this tutorial.  Here's a link to the open SSL binaries page.  This will give you the link to their Wiki where they have the recommended binaries for your OS.
 
@@ -67,7 +56,7 @@ Once installed, you'll need to run the following command to generate the key and
 This will ask you a bunch of questions.  They were all easy to answer.  Juggie's documentation on this step states that only common name is the semi-important field.  This should be set to your host name.
 
 
-## Skip to  here if you don't care to run HTTPS!
+## STOP SKIPPING! Install Alarm Server
 
 We are FINALLY ready to install Alarm Server.  Here's the link to Juggie's version.  For smartthings, you have to use the Smartthings branch which I linked to here directly.  If you don't have GIT, just click the "Download ZIP" button on the github page and extract that into any directory you want.  I used C:/tools/AlarmServer-smartthings
 
